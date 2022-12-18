@@ -1,0 +1,15 @@
+{
+  "name": "rsschool-file-manager",
+  "type": "module",
+  "scripts": {
+    "test:fm": "start -- --username=Zedd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlreadyBored/node-nodejs-basics.git"
+  },
+  "author": "Zeddikus97",
+  "bugs": {
+    "url": "https://github.com/Zeddikus97/rsschool-file-manager"
+  }
+}
