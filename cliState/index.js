@@ -1,5 +1,5 @@
 import { homedir } from 'os';
-import { normalize } from 'path';
+import { resolve } from 'path';
 
 export default class CommandLineState{
     constructor(name){
@@ -16,6 +16,6 @@ export default class CommandLineState{
     }
 
     setDir = (dir) => {
-        this.dir = normalize(dir).split('\\').join("/");
+        this.dir = resolve(dir);
     }
 }

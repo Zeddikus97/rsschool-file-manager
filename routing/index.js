@@ -1,12 +1,13 @@
 import {
     handleUp,
     handleCD,
-    handleLS
+    handleLS,
+    handleCat
 } from "../handlers/index.js"
 
-const setDefaultStatus = () => {
+const setSuccessStatus = () => {
     return { 
-        status:"default", 
+        status:"success", 
         value:''
     }
 }
@@ -31,16 +32,22 @@ const routing = async (line, currentDir) => {
             comm, 
             ...args
         ] = line.trim().split(" ");
-        console.log(args.length)
-        console.log("args")
+        let result = [];
         switch (comm) {
             case "up":
                 return 0;
             case "cd":
                 if(args.length<1) setErrorStatus("Invalid input");
-                else await handleCD(args[0]);
+                else {
+                    let newdir = await handleCD(args[0]);
+                }
             case "ls":
-                const result = await handleLS(currentDir);
+                result = await handleLS(currentDir);
+
+            case "cat":
+                if(args.length<1) setErrorStatus("Invalid input");
+                await handleCat(currentDir, args[0]);
+                return setSuccessStatus();
             default:
                 return setErrorStatus("Invalid input");
         }

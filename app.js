@@ -29,12 +29,12 @@ const app = async () => {
     
         rl.on('line', async (line) => {
             const responce = await routing(line, CLS.getDir());
-            switch (responce.status) {
+            switch (responce['status']) {
                 case "changedir":
-                    CLS.setDir(responce.value);
+                    CLS.setDir(responce['value']);
                     break;
                 case "error":
-                    console.log(responce.message);
+                    console.log(responce['value']);
                     break;
                 default:
                     break;

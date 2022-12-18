@@ -1,13 +1,14 @@
-import { readdir } from 'fs/promises';
+import { access } from 'fs/promises';
 
-const handleUp = async (dir) => {
+
+const handleCD = async (dir) => {
     try{
-        const all_files = await readdir(dir);
-        console.table(all_files);
+        await access(dir);
+        
     }
     catch(err){
         throw err;
     }
 };
 
-export default handleUp;
+export default handleCD;

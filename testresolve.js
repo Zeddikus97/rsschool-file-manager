@@ -1,9 +1,9 @@
 import {
     resolve,
     normalize,
-    isAbsolute
+    isAbsolute,
+    parse
 } from "path";
+import { homedir } from 'os';
 
-console.log(normalize("C:\\text\\file/file").split('\\').join("/"))
-console.log(isAbsolute("C:\\text\file\file.js"))
-console.log(isAbsolute('C:\\test\\demo_path.js')); 
+console.log(parse('C:/')); 
