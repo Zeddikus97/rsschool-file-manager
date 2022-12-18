@@ -2,7 +2,8 @@
   "name": "rsschool-file-manager",
   "type": "module",
   "scripts": {
-    "test:fm": "start -- --username=Zedd"
+    "test:fm": "node app.js -- --username=Zedd",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
