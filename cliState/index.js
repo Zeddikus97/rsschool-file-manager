@@ -3,7 +3,7 @@ import { normalize } from 'path';
 
 export default class CommandLineState{
     constructor(name){
-        this.dir = normalize(homedir.toString());
+        this.dir = homedir();
         this.name = name;
     }
 
@@ -16,11 +16,6 @@ export default class CommandLineState{
     }
 
     setDir = (dir) => {
-        try {
-            this.dir = dir;
-        }
-        catch (e) {
-            throw new Error(e);
-        }
+        this.dir = normalize(dir).split('\\').join("/");
     }
 }
