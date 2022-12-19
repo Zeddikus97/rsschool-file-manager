@@ -3,7 +3,8 @@ import {
     handleCD,
     handleLS,
     handleCat,
-    handleRM
+    handleRM,
+    handleCP
 } from "../handlers/index.js"
 
 const setSuccessStatus = () => {
@@ -57,7 +58,10 @@ const routing = async (line, currentDir) => {
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 await handleCat(currentDir, args[0]);
                 return setSuccessStatus();
-
+            case "cp":
+                if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
+                await handleCP(currentDir, args[0], args[1]);
+                return setSuccessStatus();
             case "rm":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 await handleRM(currentDir, args[0])
