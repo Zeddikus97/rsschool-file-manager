@@ -3,6 +3,8 @@ import {
     handleCD,
     handleLS,
     handleCat,
+    handleAdd,
+    handleRN,
     handleRM,
     handleCP,
     handleMV
@@ -58,6 +60,14 @@ const routing = async (line, currentDir) => {
             case "cat":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 await handleCat(currentDir, args[0]);
+                return setSuccessStatus();
+            case "add":
+                if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
+                await handleAdd(currentDir, args[0]);
+                return setSuccessStatus();
+            case "rn":
+                if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
+                await handleRN(currentDir, args[0], args[1]);
                 return setSuccessStatus();
             case "cp":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");

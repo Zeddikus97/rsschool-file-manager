@@ -1,15 +1,13 @@
 import { resolve } from 'path';
-import { createReadStream } from 'fs';
-import { logChunks } from '../../helpers/index.js';
+import { open } from 'fs/promises';
 
-const handleAdd = async (dir, file) => {
+const handleAdd = async (currdir, file) => {
     try{
-        let full_path = resolve(dir, file);
-        const rstream = createReadStream(full_path, { encoding: 'utf8'})
-        await logChunks(rstream);
+        let full_path = resolve(currdir, file);
+        await open(full_path, 'wx');
     }
     catch(err){
-        throw new Error(err);
+        throw err;
     } 
 };
 

@@ -5,6 +5,8 @@ import {
 } from "./navigationHandlers/index.js"
 import {
     handleCat,
+    handleAdd,
+    handleRN,
     handleCP,
     handleMV,
     handleRM
@@ -15,6 +17,8 @@ export {
     handleCD,
     handleLS,
     handleCat,
+    handleAdd,
+    handleRN,
     handleCP,
     handleMV,
     handleRM
