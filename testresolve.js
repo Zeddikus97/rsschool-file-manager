@@ -7,4 +7,5 @@ import {
 } from "path";
 import { cpus } from 'os';
 
-console.log(cpus()); 
+let resolved = resolve("C:/", "..");
+console.log(console.log(resolved)); 

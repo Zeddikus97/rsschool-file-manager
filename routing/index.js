@@ -49,50 +49,54 @@ const checkArgumensNeeded = (args, length) => {
 
 const routing = async (line, currentDir) => {
     try{
+        const new_line = line.trim().split("'").join('"').split('"').reduce((arr, curr, index)=>{
+            return index%2!=0 ? [...arr, curr] : [...arr, ...curr.split(" ")]
+        }, []).filter((elem)=> elem);
+
         const [
             comm, 
             ...args
-        ] = line.trim().split(" ");
+        ] = new_line;
+        const clean_dir = currentDir;
         let newdir = '';
-
 
         switch (comm) {
             case "up":
-                newdir = await handleUp(currentDir); 
+                newdir = await handleUp(clean_dir); 
                 return setChangeDirStatus(newdir);
             case "cd":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 else {
-                    newdir = await handleCD(currentDir, args[0]); 
+                    newdir = await handleCD(clean_dir, args[0]); 
                     return setChangeDirStatus(newdir);
                 }
             case "ls":
-                await handleLS(currentDir);
+                await handleLS(clean_dir);
                 return setSuccessStatus();
                 
             case "cat":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
-                await handleCat(currentDir, args[0]);
+                await handleCat(clean_dir, args[0]);
                 return setSuccessStatus();
             case "add":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
-                await handleAdd(currentDir, args[0]);
+                await handleAdd(clean_dir, args[0]);
                 return setSuccessStatus();
             case "rn":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
-                await handleRN(currentDir, args[0], args[1]);
+                await handleRN(clean_dir, args[0], args[1]);
                 return setSuccessStatus();
             case "cp":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
-                await handleCP(currentDir, args[0], args[1]);
+                await handleCP(clean_dir, args[0], args[1]);
                 return setSuccessStatus();
             case "mv":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
-                await handleMV(currentDir, args[0], args[1]);
+                await handleMV(clean_dir, args[0], args[1]);
                 return setSuccessStatus();
             case "rm":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
-                await handleRM(currentDir, args[0]);
+                await handleRM(clean_dir, args[0]);
                 return setSuccessStatus();
 
             case "os":
@@ -102,11 +106,11 @@ const routing = async (line, currentDir) => {
 
             case "compress":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
-                await handleCompress(currentDir, args[0], args[1]);
+                await handleCompress(clean_dir, args[0], args[1]);
                 return setSuccessStatus();
             case "decompress":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
-                await handleDecompress(currentDir, args[0], args[1]);
+                await handleDecompress(clean_dir, args[0], args[1]);
                 return setSuccessStatus();
 
             case ".exit":
