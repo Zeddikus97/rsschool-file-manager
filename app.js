@@ -5,14 +5,16 @@ import routing from "./routing/index.js";
 
 const responceHandler = async (responce, CLS) => {
     switch (responce['status']) {
+        case "exit":
+            return true;
         case "changedir":
             CLS.setDir(responce['value']);
-            break;
+            return false;
         case "error":
             console.log(responce['value']);
-            break;
+            return false;
         default:
-            break;
+            return false;
     }
 }
 
@@ -35,14 +37,14 @@ const app = async () => {
     
         rl.on('line', async (line) => {
             const responce = await routing(line, CLS.getDir());
-            responceHandler(responce, CLS);
+            const isExit = await responceHandler(responce, CLS);
+            if(isExit) rl.close();
             console.log(`You are currently in ${CLS.getDir()}`) 
         });
         
-        /*
         rl.on('SIGINT', async () => {
             rl.close();
-        });*/
+        });
 
         rl.on('close', async () => {
             console.log(`Thank you for using File Manager, ${username}, goodbye!`);

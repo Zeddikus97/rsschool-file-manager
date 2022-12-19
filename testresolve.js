@@ -5,6 +5,6 @@ import {
     parse,
     basename
 } from "path";
-import { homedir } from 'os';
+import { cpus } from 'os';
 
-console.log(parse('C:/users/text.txt.br')); 
+console.log(cpus()); 

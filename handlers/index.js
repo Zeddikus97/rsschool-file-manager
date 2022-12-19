@@ -12,6 +12,9 @@ import {
     handleRM
 } from "./filesHandlers/index.js";
 import {
+    handleOS
+} from "./osHandlers/index.js";
+import {
     handleHash
 } from "./hashHandlers/index.js";
 import{
@@ -29,6 +32,7 @@ export {
     handleCP,
     handleMV,
     handleRM,
+    handleOS,
     handleHash,
     handleCompress,
     handleDecompress

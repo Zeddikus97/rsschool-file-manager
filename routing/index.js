@@ -9,7 +9,8 @@ import {
     handleCP,
     handleMV,
     handleCompress,
-    handleDecompress
+    handleDecompress,
+    handleOS
 } from "../handlers/index.js"
 
 const setSuccessStatus = () => {
@@ -18,6 +19,14 @@ const setSuccessStatus = () => {
         value:''
     }
 }
+
+const setExitStatus = () => {
+    return { 
+        status:"exit", 
+        value:''
+    }
+}
+
 
 const setChangeDirStatus = (newdir) => {
     return { 
@@ -83,17 +92,25 @@ const routing = async (line, currentDir) => {
                 return setSuccessStatus();
             case "rm":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
-                await handleRM(currentDir, args[0])
+                await handleRM(currentDir, args[0]);
+                return setSuccessStatus();
+
+            case "os":
+                if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
+                await handleOS(args);
                 return setSuccessStatus();
 
             case "compress":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
                 await handleCompress(currentDir, args[0], args[1]);
-                return setSuccessStatus;
+                return setSuccessStatus();
             case "decompress":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
                 await handleDecompress(currentDir, args[0], args[1]);
-                return setSuccessStatus;
+                return setSuccessStatus();
+
+            case ".exit":
+                return setExitStatus();
 
             default:
                 return setErrorStatus("Invalid input");
