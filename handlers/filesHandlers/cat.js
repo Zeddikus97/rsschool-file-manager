@@ -7,6 +7,7 @@ const handleCat = async (currdir, file) => {
         let full_path = resolve(currdir, file);
         const rstream = createReadStream(full_path, { encoding: 'utf8'})
         await logChunks(rstream);
+        rstream.close();
     }
     catch(err){
         throw err;
