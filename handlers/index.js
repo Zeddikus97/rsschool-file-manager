@@ -11,6 +11,13 @@ import {
     handleMV,
     handleRM
 } from "./filesHandlers/index.js";
+import {
+    handleHash
+} from "./hashHandlers/index.js";
+import{
+    handleCompress,
+    handleDecompress
+} from "./compressHandlers/index.js"
 
 export { 
     handleUp,
@@ -21,5 +28,8 @@ export {
     handleRN,
     handleCP,
     handleMV,
-    handleRM
+    handleRM,
+    handleHash,
+    handleCompress,
+    handleDecompress
 };

@@ -7,7 +7,9 @@ import {
     handleRN,
     handleRM,
     handleCP,
-    handleMV
+    handleMV,
+    handleCompress,
+    handleDecompress
 } from "../handlers/index.js"
 
 const setSuccessStatus = () => {
@@ -32,7 +34,7 @@ const setErrorStatus = (message) => {
 }
 
 const checkArgumensNeeded = (args, length) => {
-    args.length<length ? true : false ;
+    return args.length<length ? true : false;
 }
 
 
@@ -83,6 +85,15 @@ const routing = async (line, currentDir) => {
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 await handleRM(currentDir, args[0])
                 return setSuccessStatus();
+
+            case "compress":
+                if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
+                await handleCompress(currentDir, args[0], args[1]);
+                return setSuccessStatus;
+            case "decompress":
+                if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
+                await handleDecompress(currentDir, args[0], args[1]);
+                return setSuccessStatus;
 
             default:
                 return setErrorStatus("Invalid input");

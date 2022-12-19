@@ -7,4 +7,4 @@ import {
 } from "path";
 import { homedir } from 'os';
 
-console.log(resolve(homedir())); 
+console.log(parse('C:/users/text.txt.br')); 

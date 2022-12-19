@@ -8,7 +8,7 @@ const handleAdd = async (currdir, file) => {
     }
     catch(err){
         throw err;
-    } 
+    }
 };
 
 export default handleAdd;
