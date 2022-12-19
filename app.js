@@ -1,26 +1,32 @@
-import exp from "constants";
-import {
-    resolve,
-    normalize
-} from "path";
-import {
-    parseDashArgs
-} from "./helpers/index.js";
-import * as readline from 'readline/promises';
+import { parseDashArgs } from "./helpers/index.js";
+import { createInterface } from 'readline/promises';
 import CommandLineState from "./cliState/index.js";
 import routing from "./routing/index.js";
+
+const responceHandler = async (responce) => {
+    switch (responce['status']) {
+        case "changedir":
+            CLS.setDir(responce['value']);
+            break;
+        case "error":
+            console.log(responce['value']);
+            break;
+        default:
+            break;
+    }
+}
 
 const app = async () => {
     try{
         const args = await parseDashArgs();
-        const CLS = new CommandLineState(args["username"]);
+        const CLS = new CommandLineState(args["username"] ? args["username"] : 'anon');
         let username = CLS.getName();
 
         console.log(
             `Welcome to the File Manager, ${username}!`
         );
 
-        const rl = readline.createInterface({
+        const rl = createInterface({
             input: process.stdin,
             output: process.stdout
         });
@@ -29,16 +35,7 @@ const app = async () => {
     
         rl.on('line', async (line) => {
             const responce = await routing(line, CLS.getDir());
-            switch (responce['status']) {
-                case "changedir":
-                    CLS.setDir(responce['value']);
-                    break;
-                case "error":
-                    console.log(responce['value']);
-                    break;
-                default:
-                    break;
-            }
+            responceHandler(responce);
             console.log(`You are currently in ${CLS.getDir()}`) 
         });
         

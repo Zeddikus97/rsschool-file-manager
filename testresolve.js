@@ -2,8 +2,9 @@ import {
     resolve,
     normalize,
     isAbsolute,
-    parse
+    parse,
+    basename
 } from "path";
 import { homedir } from 'os';
 
-console.log(parse('C:/')); 
+console.log(resolve(homedir())); 

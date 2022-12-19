@@ -2,7 +2,8 @@ import {
     handleUp,
     handleCD,
     handleLS,
-    handleCat
+    handleCat,
+    handleRM
 } from "../handlers/index.js"
 
 const setSuccessStatus = () => {
@@ -26,28 +27,42 @@ const setErrorStatus = (message) => {
     }
 }
 
+const checkArgumensNeeded = (args, length) => {
+    args.length<length ? true : false ;
+}
+
+
 const routing = async (line, currentDir) => {
     try{
         const [
             comm, 
             ...args
         ] = line.trim().split(" ");
-        let result = [];
+        let newdir = '';
+
+
         switch (comm) {
             case "up":
                 return 0;
             case "cd":
-                if(args.length<1) setErrorStatus("Invalid input");
+                if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 else {
-                    let newdir = await handleCD(args[0]);
+                    newdir = await handleCD(currentDir, args[0]); 
+                    return setChangeDirStatus(newdir);
                 }
             case "ls":
                 result = await handleLS(currentDir);
 
             case "cat":
-                if(args.length<1) setErrorStatus("Invalid input");
+                if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 await handleCat(currentDir, args[0]);
                 return setSuccessStatus();
+
+            case "rm":
+                if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
+                await handleRM(currentDir, args[0])
+                return setSuccessStatus();
+
             default:
                 return setErrorStatus("Invalid input");
         }

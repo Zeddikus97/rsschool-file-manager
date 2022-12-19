@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { createReadStream } from 'fs';
 import { logChunks } from '../../helpers/index.js';
 
-const handleCat = async (dir, file) => {
+const handleAdd = async (dir, file) => {
     try{
         let full_path = resolve(dir, file);
         const rstream = createReadStream(full_path, { encoding: 'utf8'})
@@ -13,4 +13,4 @@ const handleCat = async (dir, file) => {
     } 
 };
 
-export default handleCat;
+export default handleAdd;

@@ -7,7 +7,7 @@ const handleRM = async (dir, file) => {
         await unlink(full_path);
     }
     catch(err){
-        throw new Error(err);
+        throw err;
     } 
 };
 
