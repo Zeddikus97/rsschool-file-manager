@@ -47,7 +47,8 @@ const routing = async (line, currentDir) => {
 
         switch (comm) {
             case "up":
-                return 0;
+                newdir = await handleUp(currentDir); 
+                return setChangeDirStatus(newdir);
             case "cd":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 else {
@@ -55,8 +56,9 @@ const routing = async (line, currentDir) => {
                     return setChangeDirStatus(newdir);
                 }
             case "ls":
-                result = await handleLS(currentDir);
-
+                await handleLS(currentDir);
+                return setSuccessStatus();
+                
             case "cat":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 await handleCat(currentDir, args[0]);

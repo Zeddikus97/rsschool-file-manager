@@ -3,8 +3,6 @@ import { resolve  } from 'path';
 
 const checkDir = async (currdir, path) => {
     try{
-        console.log(currdir);
-        console.log(path);
         const respath = resolve(currdir, path);
         const state = await stat(respath);
         const check = state.isDirectory();
@@ -14,6 +12,10 @@ const checkDir = async (currdir, path) => {
         };
     }
     catch(err){
+        /*
+        if(err.code=="EPERM"){
+            return
+        }*/
         throw err;
     } 
 };
