@@ -8,7 +8,6 @@ const handleCD = async (currdir, newdir) => {
         return resdir;
     }
     catch(err){
-        console.log(err)
         throw err;
     }
 };

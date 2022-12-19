@@ -4,7 +4,8 @@ import {
     handleLS,
     handleCat,
     handleRM,
-    handleCP
+    handleCP,
+    handleMV
 } from "../handlers/index.js"
 
 const setSuccessStatus = () => {
@@ -61,6 +62,10 @@ const routing = async (line, currentDir) => {
             case "cp":
                 if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
                 await handleCP(currentDir, args[0], args[1]);
+                return setSuccessStatus();
+            case "mv":
+                if(checkArgumensNeeded(args, 2)) return setErrorStatus("Invalid input");
+                await handleMV(currentDir, args[0], args[1]);
                 return setSuccessStatus();
             case "rm":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");

@@ -3,7 +3,7 @@ import { createInterface } from 'readline/promises';
 import CommandLineState from "./cliState/index.js";
 import routing from "./routing/index.js";
 
-const responceHandler = async (responce) => {
+const responceHandler = async (responce, CLS) => {
     switch (responce['status']) {
         case "changedir":
             CLS.setDir(responce['value']);
@@ -35,7 +35,7 @@ const app = async () => {
     
         rl.on('line', async (line) => {
             const responce = await routing(line, CLS.getDir());
-            responceHandler(responce);
+            responceHandler(responce, CLS);
             console.log(`You are currently in ${CLS.getDir()}`) 
         });
         

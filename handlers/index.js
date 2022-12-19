@@ -6,6 +6,7 @@ import {
 import {
     handleCat,
     handleCP,
+    handleMV,
     handleRM
 } from "./filesHandlers/index.js";
 
@@ -15,5 +16,6 @@ export {
     handleLS,
     handleCat,
     handleCP,
+    handleMV,
     handleRM
 };
