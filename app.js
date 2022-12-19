@@ -48,7 +48,6 @@ const app = async () => {
 
         rl.on('close', async () => {
             console.log(`Thank you for using File Manager, ${username}, goodbye!`);
-            /*process.nextTick(() => exit());*/
         });
     }
     catch(err){
