@@ -8,6 +8,7 @@ import {
     handleRM,
     handleCP,
     handleMV,
+    handleHash,
     handleCompress,
     handleDecompress,
     handleOS
@@ -26,7 +27,6 @@ const setExitStatus = () => {
         value:''
     }
 }
-
 
 const setChangeDirStatus = (newdir) => {
     return { 
@@ -102,6 +102,11 @@ const routing = async (line, currentDir) => {
             case "os":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
                 await handleOS(args);
+                return setSuccessStatus();
+
+            case "hash":
+                if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
+                await handleHash(clean_dir, args[0]);
                 return setSuccessStatus();
 
             case "compress":
